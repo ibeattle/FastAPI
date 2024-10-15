@@ -47,6 +47,3 @@ def runner(app):
 def db(app):
     with app.app_context():
         yield _db
-
-
-

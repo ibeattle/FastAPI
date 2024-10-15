@@ -1,9 +1,10 @@
-import typing as t
 import datetime
-from typing import List, Dict, Any
-from sqlalchemy import String, ForeignKey, UniqueConstraint
-from sqlalchemy.orm import Mapped, mapped_column, relationship, DeclarativeBase
+import typing as t
+from typing import Any, Dict, List
+
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import ForeignKey, String, UniqueConstraint
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class Base(DeclarativeBase):

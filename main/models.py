@@ -16,14 +16,16 @@ db = SQLAlchemy(
 )
 
 if t.TYPE_CHECKING:
+
     class Model(Base):
         pass
+
 else:
     Model = db.Model
 
 
 class Client(Model):
-    __tablename__ = 'client'
+    __tablename__ = "client"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(50), nullable=False)
@@ -35,15 +37,17 @@ class Client(Model):
     )
 
     def __repr__(self):
-        return (f"Client(id={self.id}, name={self.name}, "
-                f"surname={self.surname}, credit_card={self.credit_card}, car_number={self.car_number})")
+        return (
+            f"Client(id={self.id}, name={self.name}, "
+            f"surname={self.surname}, credit_card={self.credit_card}, car_number={self.car_number})"
+        )
 
     def to_json(self) -> Dict[str, Any]:
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
 class Parking(Model):
-    __tablename__ = 'parking'
+    __tablename__ = "parking"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     address: Mapped[str] = mapped_column(String(100), nullable=False)
@@ -55,9 +59,11 @@ class Parking(Model):
     )
 
     def __repr__(self):
-        return (f"Parking(id={self.id}, address={self.address}, "
-                f"opened={self.opened}, count_places={self.count_places}, "
-                f"count_available_places={self.count_available_places})")
+        return (
+            f"Parking(id={self.id}, address={self.address}, "
+            f"opened={self.opened}, count_places={self.count_places}, "
+            f"count_available_places={self.count_available_places})"
+        )
 
     def to_json(self) -> Dict[str, Any]:
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -71,11 +77,15 @@ class ClientParking(Model):
     parking_id: Mapped[int] = mapped_column(ForeignKey("parking.id"), nullable=True)
     time_in: Mapped[datetime.datetime] = mapped_column(nullable=True)
     time_out: Mapped[datetime.datetime] = mapped_column(nullable=True)
-    __table_args__ = (UniqueConstraint('client_id', 'parking_id', name='unique_client_parking'),)
+    __table_args__ = (
+        UniqueConstraint("client_id", "parking_id", name="unique_client_parking"),
+    )
 
     def __repr__(self):
-        return (f"ClientParking(id={self.id}, client_id={self.client_id}, "
-                f"parking_id={self.parking_id}, time_in={self.time_in}, time_out={self.time_out})")
+        return (
+            f"ClientParking(id={self.id}, client_id={self.client_id}, "
+            f"parking_id={self.parking_id}, time_in={self.time_in}, time_out={self.time_out})"
+        )
 
     def to_json(self) -> Dict[str, Any]:
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}

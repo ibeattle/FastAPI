@@ -1,5 +1,6 @@
-from .factories import ClientFactory, ParkingFactory
 from main.models import Client, Parking
+
+from .factories import ClientFactory, ParkingFactory
 
 
 def test_create_client(client, db):

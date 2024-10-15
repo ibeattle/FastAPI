@@ -15,7 +15,7 @@ pytest==8.3.3
 python-dateutil==2.9.0.post0
 six==1.16.0
 SQLAlchemy==2.0.35
-types-SQLAlchemy==1.4.53.38
+sqlalchemy-stubs==0.4
 typing_extensions==4.12.2
 Werkzeug==3.0.4
 black==24.10.0

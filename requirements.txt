@@ -1,6 +1,7 @@
 blinker==1.8.2
 click==8.1.7
 factory_boy==3.3.1
+types-factory-boy==0.4.1
 Faker==29.0.0
 Flask==3.0.3
 Flask-SQLAlchemy==3.1.1
@@ -15,7 +16,6 @@ pytest==8.3.3
 python-dateutil==2.9.0.post0
 six==1.16.0
 SQLAlchemy==2.0.35
-sqlalchemy2-stubs==0.0.2a38
 typing_extensions==4.12.2
 Werkzeug==3.0.4
 black==24.10.0

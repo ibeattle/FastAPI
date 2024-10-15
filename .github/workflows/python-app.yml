@@ -50,8 +50,4 @@ jobs:
         
     - name: Test with isort
       run: |
-       isort --check-only .   
-       
-    - name: Test with flask8
-      run: |
-       flask8 .   
+       isort --check-only .

@@ -1,6 +1,7 @@
+import typing as t
 import datetime
 from typing import List, Dict, Any
-from sqlalchemy import String, ForeignKey, UniqueConstraint, Boolean
+from sqlalchemy import String, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship, DeclarativeBase
 from flask_sqlalchemy import SQLAlchemy
 
@@ -14,8 +15,14 @@ db = SQLAlchemy(
     # engine_options={"echo": True}
 )
 
+if t.TYPE_CHECKING:
+    class Model(Base):
+        pass
+else:
+    Model = db.Model
 
-class Client(db.Model):
+
+class Client(Model):
     __tablename__ = 'client'
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -35,7 +42,7 @@ class Client(db.Model):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
-class Parking(db.Model):
+class Parking(Model):
     __tablename__ = 'parking'
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -56,7 +63,7 @@ class Parking(db.Model):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
-class ClientParking(db.Model):
+class ClientParking(Model):
     __tablename__ = "client_parking"
 
     id: Mapped[int] = mapped_column(primary_key=True)

@@ -2,7 +2,7 @@ import pytest
 from main.models import Client, Parking, ClientParking
 
 
-@pytest.mark.parametrize("route", ['/clients', '/clients/1'])
+@pytest.mark.parametrize("route", ["/clients", "/clients/1"])
 def test_statuscode(client, route):
     response = client.get("/clients")
 
@@ -14,11 +14,11 @@ def test_create_client(client) -> None:
         "name": "Konstantsin",
         "surname": "Zhukov",
         "credit_card": "666666",
-        "car_number": "A1B100C500"
+        "car_number": "A1B100C500",
     }
     resp = client.post("/clients", json=client_data)
 
-    assert resp.json['id'] == 3
+    assert resp.json["id"] == 3
     assert resp.status_code == 201
 
 
@@ -31,7 +31,7 @@ def test_create_parking(client) -> None:
     }
     resp = client.post("/parkings", json=parking_data)
 
-    assert resp.json['id'] == 2
+    assert resp.json["id"] == 2
     assert resp.status_code == 201
 
 

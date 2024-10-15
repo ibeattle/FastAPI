@@ -12,13 +12,22 @@ def create_app(test_config=None):
         db_name = 'sqlite:///test.db'
     app = Flask(__name__)
     app.config["SQLALCHEMY_DATABASE_URI"] = db_name
-    from .models import db, Client, Parking, ClientParking
+    from .models import db
     db.init_app(app)
 
     @app.before_request
     def before_request():
         # db.drop_all()
         db.create_all()
+
+    create_clients_endpoints(app)
+    create_parking_endpoints(app)
+
+    return app
+
+
+def create_clients_endpoints(app):
+    from .models import db, Client, Parking
 
     @app.route('/clients')
     def all_clients():
@@ -70,6 +79,10 @@ def create_app(test_config=None):
         return {
             "id": result[0], "address": result[1], "count_places": result[2], "count_available_places": result[3]
         }, 201
+
+
+def create_parking_endpoints(app):
+    from .models import db, Client, Parking, ClientParking
 
     @app.route("/client_parkings", methods=["POST"])
     def park():
@@ -141,5 +154,3 @@ def create_app(test_config=None):
             "time_out": time_out,
             "payment": payment,
         }
-
-    return app

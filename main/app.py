@@ -2,7 +2,7 @@ import datetime
 
 import sqlalchemy
 from flask import Flask, request
-from sqlalchemy import select, insert, update, and_
+from sqlalchemy import and_, insert, select, update
 
 
 def create_app(test_config=None):
@@ -28,7 +28,7 @@ def create_app(test_config=None):
 
 
 def create_clients_endpoints(app):
-    from .models import db, Client, Parking
+    from .models import Client, Parking, db
 
     @app.route("/clients")
     def all_clients():
@@ -93,7 +93,7 @@ def create_clients_endpoints(app):
 
 
 def create_parking_endpoints(app):
-    from .models import db, Client, Parking, ClientParking
+    from .models import Client, ClientParking, Parking, db
 
     @app.route("/client_parkings", methods=["POST"])
     def park():

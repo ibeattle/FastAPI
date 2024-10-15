@@ -20,4 +20,3 @@ def test_create_parking(client, db):
 
     assert parking.id == 2
     assert before < after
-
